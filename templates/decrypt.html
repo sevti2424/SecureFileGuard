@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Decrypt File</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #F1F1F1; /* Light gray for an elegant background */
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        header {
+            background-color: #2C3E50; /* Dark navy blue header */
+            color: #F39C12; /* Gold accent color */
+            padding: 20px;
+            text-align: center;
+            width: 100%;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            margin: 0;
+            font-size: 2.8em;
+            letter-spacing: 1px;
+        }
+
+        .container {
+            width: 60%;
+            max-width: 650px;
+            margin-top: 30px;
+            padding: 40px;
+            background-color: white; /* White background for the form container */
+            border-radius: 15px;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            margin-bottom: 8px;
+            font-size: 1.1em;
+            font-weight: bold;
+            color: #2C3E50; /* Dark navy for label text */
+        }
+
+        input[type="file"] {
+            margin: 15px 0;
+            padding: 12px;
+            font-size: 1.1em;
+            border-radius: 8px;
+            border: 1px solid #BDC3C7; /* Subtle border color */
+            background-color: #ECF0F1; /* Light gray input background */
+        }
+
+        input[type="file"]:focus {
+            border-color: #F39C12; /* Gold color on focus */
+            outline: none;
+        }
+
+        button {
+            padding: 12px;
+            font-size: 1.2em;
+            color: white;
+            background-color: #F39C12; /* Gold button */
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #E67E22; /* Darker gold for hover */
+        }
+
+        .success-message, .error-message {
+            margin-top: 20px;
+            text-align: center;
+            font-size: 1.2em;
+        }
+
+        .success-message {
+            color: #27AE60; /* Elegant green for success */
+        }
+
+        .error-message {
+            color: #E74C3C; /* Elegant red for error */
+        }
+
+        .back-home {
+            display: inline-block;
+            margin-top: 30px;
+            padding: 12px 25px;
+            background-color: #2C3E50; /* Dark navy button for "Back to Home" */
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            font-size: 1.1em;
+            text-align: center;
+            transition: background-color 0.3s ease;
+        }
+
+        .back-home:hover {
+            background-color: #34495E; /* Slightly lighter navy on hover */
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                width: 85%;
+            }
+
+            h1 {
+                font-size: 2em;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>SecureFileGuard - File Decryption</h1>
+    </header>
+
+    <div class="container">
+        <form method="POST" enctype="multipart/form-data">
+            <label for="file">Encrypted File</label>
+            <input type="file" name="file" required>
+
+            <label for="key_file">Key File</label>
+            <input type="file" name="key_file" required>
+
+            <button type="submit">Decrypt</button>
+        </form>
+
+        {% if decrypted_file %}
+            <div class="success-message">
+                <h2>File Decrypted Successfully!</h2>
+                <p>Download the decrypted file: 
+                    <a href="{{ url_for('main.download_decrypted_file', filename=decrypted_file) }}" style="color: #F39C12;">{{ decrypted_file }}</a>
+                </p>
+            </div>
+        {% elif request.method == 'POST' %}
+            <div class="error-message">
+                <h2>Decryption failed. Please check the uploaded files and try again.</h2>
+            </div>
+        {% endif %}
+
+        <!-- Link back to the home page -->
+        <a href="{{ url_for('main.index') }}" class="back-home">Back to Home</a>
+    </div>
+
+</body>
+</html>

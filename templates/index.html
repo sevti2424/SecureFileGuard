@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SecureFileGuard - File Encryption and Decryption</title>
+    <!-- Tailwind CSS via CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .fade-in {
+            animation: fadeIn 1s ease-out forwards;
+        }
+        
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-r from-indigo-600 via-blue-500 to-teal-400 text-white min-h-screen flex flex-col items-center justify-center">
+    
+    <!-- Container for the content -->
+    <div class="text-center p-10 bg-white bg-opacity-90 rounded-lg shadow-lg w-full max-w-md mt-10">
+        <h1 class="text-4xl font-extrabold mb-6 text-gray-800">Welcome to SecureFileGuard</h1>
+        <p class="text-lg mb-8 text-gray-700">Your ultimate tool for file encryption and decryption. Protect your sensitive data with ease.</p>
+        
+        <div class="space-y-6">
+            <a href="{{ url_for('main.encrypt') }}" class="block w-full py-3 text-white bg-blue-600 rounded-lg hover:bg-blue-700 text-lg transition duration-300">
+                Encrypt a File
+            </a>
+            <a href="{{ url_for('main.decrypt') }}" class="block w-full py-3 text-white bg-green-600 rounded-lg hover:bg-green-700 text-lg transition duration-300">
+                Decrypt a File
+            </a>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="absolute bottom-0 w-full py-4 text-center text-gray-300">
+        <p>&copy; 2024 SecureFileGuard. All rights reserved.</p>
+    </footer>
+    
+</body>
+</html>
